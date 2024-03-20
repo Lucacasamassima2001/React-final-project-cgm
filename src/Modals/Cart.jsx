@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Button from "../Button/Button";
 
 export default function Cart({

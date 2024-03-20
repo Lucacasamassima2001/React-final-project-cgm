@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Meal from "./Meal";
 
 export default function Meals({ meals, onAdd, loadingText, fallBackText }) {

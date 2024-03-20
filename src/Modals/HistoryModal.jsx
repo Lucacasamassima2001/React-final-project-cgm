@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { fetchOrders } from "../http";
 import Button from "../Button/Button";
