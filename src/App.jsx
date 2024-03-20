@@ -160,6 +160,7 @@ function App() {
             setCheckout(true);
           }}
           data={orderData.items}
+          onReset={setOrderData}
         />
       </Modal>
       <Header

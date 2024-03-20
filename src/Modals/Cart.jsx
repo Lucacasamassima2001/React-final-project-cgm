@@ -8,6 +8,7 @@ export default function Cart({
   onClose,
   data,
   onCheckout,
+  onReset,
 }) {
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -15,9 +16,14 @@ export default function Cart({
   );
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
 
+  function resetOrder() {
+    onReset({ items: [], customer: {} });
+  }
+
   return (
     <div className="cart">
       <h2>Your Cart:</h2>
+      {items.length === 0 ? <h4>No items in cart...</h4> : null}
       <ul>
         {items.map((item) =>
           item.quantity > 0 ? (
@@ -36,6 +42,7 @@ export default function Cart({
       </ul>
       <div className="cart-total">Total: {formattedTotalPrice}</div>
       <div className="modal-actions">
+        {data.length > 0 ? <Button onClick={resetOrder}>Reset</Button> : null}
         <Button onClick={onClose}>Close</Button>
         {data.length > 0 ? (
           <Button onClick={onCheckout}>Go to Checkout</Button>

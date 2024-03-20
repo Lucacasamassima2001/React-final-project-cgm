@@ -204,6 +204,13 @@ h1 {
   gap: 1rem;
 }
 
+.control-row-error {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  background-color: red;
+}
+
 .button {
   font: inherit;
   cursor: pointer;
@@ -324,6 +331,6 @@ h1 {
   gap: 1rem;
 }
 
-.input-invalid {
+.error {
   border: 2px solid red;
 }

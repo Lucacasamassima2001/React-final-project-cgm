@@ -1,12 +1,17 @@
 /* eslint-disable react/prop-types */
-export default function Input({ labelText, onChange, inputType, inputName }) {
+export default function Input({
+  labelText,
+  onChange,
+  inputType,
+  inputName,
+  error,
+}) {
   return (
     <div>
       <label htmlFor={labelText}>{labelText}</label>
-      <div className="control-row">
+      <div className={"control-row"}>
         <input
-          required
-          aria-required="true"
+          className={error ? "control-row-error" : "control-row"}
           onChange={onChange}
           name={inputName}
           type={inputType}
