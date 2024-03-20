@@ -11,6 +11,9 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
   const [success, setSuccess] = useState(false);
 
+  let nameNotValid = orderData.customer.name === "";
+  console.log(nameNotValid);
+
   // function to get customerData
   function getInputValues(e) {
     const { name, value } = e.target;
@@ -31,14 +34,22 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
   async function handleSave(e) {
     e.preventDefault();
 
-    try {
-      await updateUserOrder(orderData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      onSave({ items: [], customer: {} });
-      setSuccess(true);
+    if (nameNotValid) {
+      console.log("name not valid");
+    } else {
+      try {
+        await updateUserOrder(orderData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        onSave({ items: [], customer: {} });
+        setSuccess(true);
+      }
     }
+  }
+
+  function resetForm() {
+    document.getElementById("form").reset();
   }
 
   return (
@@ -59,9 +70,10 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
         <div>
           <h2>Checkout</h2>
           <p>Total Price: {formattedTotalPrice}</p>
-          <form onSubmit={handleSave}>
+          <form id="form" onSubmit={handleSave}>
             <div className="control">
               <Input
+                error={nameNotValid ? true : false}
                 labelText={"Full-name"}
                 onChange={getInputValues}
                 inputName={"name"}
@@ -93,6 +105,7 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
               />
             </div>
             <div className="modal-actions">
+              <Button onClick={resetForm}>Reset</Button>
               <Button onClick={onClose}>Close</Button>
               <Button>Submit Order</Button>
             </div>
