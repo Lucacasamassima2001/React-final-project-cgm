@@ -75,6 +75,16 @@ h1 {
   overflow: hidden;
   text-align: center;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+  animation: pulsing-card 1s;
+}
+
+@keyframes pulsing-card {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .meal-item article {
@@ -396,5 +406,68 @@ h1 {
 
   #main-header #title {
     padding-bottom: 2rem;
+  }
+}
+
+/* landing page */
+
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.landing__content {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 999;
+  animation: slide-in-from-bottom 1s;
+
+  & > h1 {
+    font-size: 3rem;
+  }
+  & > h2 {
+    animation: infinite pulse 1s;
+    font-size: 2rem;
+  }
+  & > button {
+    animation: infinite pulse 1s;
+    font-size: 1.5rem;
+  }
+}
+
+.landing__img {
+  margin-top: 2rem;
+  width: 200px;
+  border-radius: 50%;
+  border: #ffab04 2px solid;
+}
+
+.landing__text {
+  margin-top: 5rem;
+  text-align: center;
+  width: 60%;
+  font-size: 3rem;
+  font-style: italic;
+}
+
+.opacity {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-image: url("/public/food.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 40%;
+  opacity: 0.3;
+}
+
+@keyframes slide-in-from-bottom {
+  0% {
+    transform: translateY(50%);
   }
 }
