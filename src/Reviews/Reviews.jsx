@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState } from "react";
 import Button from "../Button/Button";
 import { inviaRecensione } from "../http";
@@ -18,6 +17,13 @@ export default function Reviews() {
     console.log(userReview);
   };
 
+  const getText = (e) => {
+    setUserReview((prevReview) => ({
+      ...prevReview,
+      text: e.target.value,
+    }));
+  };
+
   async function handleReview(e) {
     e.preventDefault();
 
@@ -28,13 +34,14 @@ export default function Reviews() {
     } finally {
       setSuccess(true);
     }
+    console.log(userReview);
   }
 
   return (
     <div>
       {success ? (
         <div id="reviews">
-          <h1>Grazie per il feedback</h1>
+          <h1>Grazie per il feedback!!</h1>
           <img src="/1426689-carino-bambini-con-panin.png" alt="" />
         </div>
       ) : (
@@ -86,7 +93,15 @@ export default function Reviews() {
 
           <div>
             <h2>Dacci un tuo parere su come migliorare</h2>
-            <textarea className="textarea"></textarea>
+            <textarea
+              className="textarea"
+              name="text"
+              onChange={getText}
+              value={userReview.text}
+              placeholder="Scrivi qui..."
+              cols="30"
+              rows="10"
+            ></textarea>
           </div>
 
           <Button type="submit" onClick={handleReview}>

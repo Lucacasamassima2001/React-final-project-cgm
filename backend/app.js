@@ -73,13 +73,13 @@ app.post("/orders", async (req, res) => {
   res.status(201).json({ message: "Order created!" });
 });
 
-app.post("/rewiew", async (req, res) => {
+app.post("/reviews", async (req, res) => {
   const userReview = req.body.review;
 
   if (
     userReview === null ||
     userReview.votes === null ||
-    userReview.text.length === null
+    userReview.text.length === 0
   ) {
     return res.status(400).json({ message: "Missing data." });
   }
@@ -88,7 +88,7 @@ app.post("/rewiew", async (req, res) => {
     userReview.votes.app < 1 ||
     userReview.votes.food < 1 ||
     userReview.votes.service < 1 ||
-    userReview.text.length.trim() === ""
+    userReview.text.length === ""
   ) {
     return res.status(400).json({
       message: "Miss review: the vote or the text is missing.",
