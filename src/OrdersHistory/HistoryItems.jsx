@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import Button from "../Button/Button";
 
 export default function HistoryItems({ item }) {

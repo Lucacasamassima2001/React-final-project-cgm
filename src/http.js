@@ -38,10 +38,10 @@ export async function fetchOrders() {
   return resData;
 }
 
-export async function inviaRecensione(recensione) {
+export async function inviaRecensione(review) {
   const response = await fetch("http://localhost:3000/reviews", {
     method: "POST",
-    body: JSON.stringify({ recensione }),
+    body: JSON.stringify({ review }),
     headers: {
       "Content-Type": "application/json",
     },

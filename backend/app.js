@@ -73,6 +73,39 @@ app.post("/orders", async (req, res) => {
   res.status(201).json({ message: "Order created!" });
 });
 
+app.post("/rewiew", async (req, res) => {
+  const userReview = req.body.review;
+
+  if (
+    userReview === null ||
+    userReview.votes === null ||
+    userReview.text.length === null
+  ) {
+    return res.status(400).json({ message: "Missing data." });
+  }
+
+  if (
+    userReview.votes.app < 1 ||
+    userReview.votes.food < 1 ||
+    userReview.votes.service < 1 ||
+    userReview.text.length.trim() === ""
+  ) {
+    return res.status(400).json({
+      message: "Miss review: the vote or the text is missing.",
+    });
+  }
+
+  const newReview = {
+    ...userReview,
+    id: (Math.random() * 1000).toString(),
+  };
+  const reviews = await fs.readFile("./data/reviews.json", "utf8");
+  const allReviews = JSON.parse(reviews);
+  allReviews.push(newReview);
+  await fs.writeFile("./data/reviews.json", JSON.stringify(allReviews));
+  res.status(201).json({ message: "Review created!" });
+});
+
 app.use((req, res) => {
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
