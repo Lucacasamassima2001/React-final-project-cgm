@@ -1,3 +1,7 @@
+
+/* eslint-disable react/prop-types */
+export default function Button({ children, onClick, historyItem }) {
+
 export default function Button({
   children,
   onClick,
@@ -5,6 +9,7 @@ export default function Button({
   cartStyle,
   ...props
 }) {
+
   return (
     <button
       onClick={onClick}

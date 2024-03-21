@@ -5,6 +5,7 @@ export default function Input({
   inputType,
   inputName,
   error,
+  placeholderText,
 }) {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function Input({
           onChange={onChange}
           name={inputName}
           type={inputType}
+          placeholder={placeholderText}
         />
       </div>
     </div>
