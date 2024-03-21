@@ -1,6 +1,6 @@
 export default function SuccessModal() {
   return (
-    <div>
+    <div className="modal">
       <h2>Success</h2>
     </div>
   );
