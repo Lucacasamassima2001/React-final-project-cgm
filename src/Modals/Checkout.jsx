@@ -10,33 +10,43 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
   );
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
   const [success, setSuccess] = useState(false);
-
-  let nameNotValid = orderData.customer.name === "";
-  console.log(nameNotValid);
+  const [error, setError] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    street: "",
+    ["postal-code"]: "",
+    city: "",
+  });
 
   // function to get customerData
   function getInputValues(e) {
     const { name, value } = e.target;
+    const userData = { ...formData, [name]: value };
+    setFormData(userData);
+    onSave((prev) => ({ ...prev, customer: userData }));
+  }
 
-    onSave((prev) => {
-      return {
-        ...prev,
-        customer: {
-          ...prev.customer,
-          [name]: value,
-        },
-      };
-    });
+  function checkInputValues() {
+    if (
+      formData.email === "" ||
+      !formData.email.includes("@") ||
+      formData.name === "" ||
+      formData.street === "" ||
+      formData["postal-code"] === "" ||
+      formData.city === ""
+    ) {
+      return false;
+    }
+    return true;
   }
 
   // function to send order to db
 
   async function handleSave(e) {
     e.preventDefault();
-
-    if (nameNotValid) {
-      console.log("name not valid");
-    } else {
+    checkInputValues();
+    if (checkInputValues()) {
       try {
         await updateUserOrder(orderData);
       } catch (error) {
@@ -45,11 +55,15 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
         onSave({ items: [], customer: {} });
         setSuccess(true);
       }
+    } else {
+      console.log("not valid");
+      setError(true);
     }
   }
 
   function resetForm() {
     document.getElementById("form").reset();
+    setError(false);
   }
 
   return (
@@ -73,35 +87,67 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
           <form id="form" onSubmit={handleSave}>
             <div className="control">
               <Input
-                error={nameNotValid ? true : false}
-                labelText={"Full-name"}
+                error={error && formData.name === ""}
                 onChange={getInputValues}
+                labelText={"Full-name"}
                 inputName={"name"}
                 inputType={"text"}
+                placeholderText={
+                  error && formData.name === ""
+                    ? "Please enter your name..."
+                    : ""
+                }
               />
+
               <Input
-                labelText={"E-Mail address"}
+                error={error && formData.email === ""}
                 onChange={getInputValues}
+                labelText={"E-Mail address"}
                 inputName={"email"}
                 inputType={"email"}
+                placeholderText={
+                  error && formData.email === ""
+                    ? "Please enter your email..."
+                    : ""
+                }
               />
               <Input
-                labelText={"Street address"}
+                error={error && formData.street === ""}
                 onChange={getInputValues}
+                labelText={"Street address"}
                 inputName={"street"}
                 inputType={"text"}
+                placeholderText={
+                  error && formData.street === ""
+                    ? "Please insert your street..."
+                    : ""
+                }
               />
+
               <Input
-                labelText={"Postal code"}
+                error={error && formData["postal-code"] === ""}
                 onChange={getInputValues}
+                labelText={"Postal code"}
                 inputName={"postal-code"}
                 inputType={"number"}
+                placeholderText={
+                  error && formData["postal-code"] === ""
+                    ? "Please enter your postal code..."
+                    : ""
+                }
               />
+
               <Input
-                labelText={"City"}
+                error={error && formData.city === ""}
                 onChange={getInputValues}
+                labelText={"City"}
                 inputName={"city"}
                 inputType={"text"}
+                placeholderText={
+                  error && formData.city === ""
+                    ? "Please enter your city..."
+                    : ""
+                }
               />
             </div>
             <div className="modal-actions">
