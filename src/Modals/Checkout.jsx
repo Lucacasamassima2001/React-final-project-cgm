@@ -67,7 +67,7 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
   }
 
   return (
-    <div>
+    <div id="checkout">
       {success ? (
         <div>
           <h2>Success!</h2>
@@ -151,10 +151,12 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
               />
             </div>
             <div className="modal-actions">
-              <Button onClick={onClose}>Close</Button>
               <Button>Submit Order</Button>
             </div>
           </form>
+          <Button id="close-btn" onClick={onClose}>
+            Close
+          </Button>
           <Button onClick={resetForm}>Reset</Button>
         </div>
       )}

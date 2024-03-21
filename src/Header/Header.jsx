@@ -7,8 +7,14 @@ export default function Header({ onOpen, data, onHistory }) {
         <img src="/public/logo.jpg" alt="" />
         <h1>REACTFOOD</h1>
       </div>
-      <Button onClick={onHistory}>History</Button>
-      <Button onClick={onOpen}>Cart ({data.length})</Button>
+      <Button className="history-btn button" onClick={onHistory}>
+        <i className="fa-solid fa-rectangle-list"></i>History
+      </Button>
+      <Button cartStyle="cart-btn" onClick={onOpen}>
+        <i className="fa-solid fa-cart-shopping"></i>
+        Cart ({data.length})
+      </Button>
+      <p></p>
     </header>
   );
 }

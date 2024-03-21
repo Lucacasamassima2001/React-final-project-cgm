@@ -32,9 +32,13 @@ export default function Cart({
                 {item.name} - {item.quantity} x ${item.price}
               </p>
               <div className="cart-item-actions">
-                <Button onClick={() => onRemove(item)}>-</Button>
+                <Button onClick={() => onRemove(item)}>
+                  <span>-</span>
+                </Button>
                 {item.quantity}
-                <Button onClick={() => onAdd(item)}>+</Button>
+                <Button onClick={() => onAdd(item)}>
+                  <span>+</span>
+                </Button>
               </div>
             </li>
           ) : null
