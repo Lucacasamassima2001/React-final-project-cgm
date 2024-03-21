@@ -37,3 +37,21 @@ export async function fetchOrders() {
 
   return resData;
 }
+
+export async function inviaRecensione(review) {
+  const response = await fetch("http://localhost:3000/reviews", {
+    method: "POST",
+    body: JSON.stringify({ review }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const resData = await response.json();
+
+  if (!response.ok) {
+    throw new Error("Failed to send review.");
+  }
+
+  return resData.message;
+}
