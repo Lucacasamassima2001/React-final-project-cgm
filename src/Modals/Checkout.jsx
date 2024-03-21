@@ -105,11 +105,11 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
               />
             </div>
             <div className="modal-actions">
-              <Button onClick={resetForm}>Reset</Button>
               <Button onClick={onClose}>Close</Button>
               <Button>Submit Order</Button>
             </div>
           </form>
+          <Button onClick={resetForm}>Reset</Button>
         </div>
       )}
     </div>
