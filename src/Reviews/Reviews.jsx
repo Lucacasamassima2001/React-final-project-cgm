@@ -7,10 +7,11 @@ export default function Reviews() {
   const [success, setSuccess] = useState(false);
   const [userReview, setUserReview] = useState({
     text: "",
+    name: "",
     votes: { app: 0, food: 0, service: 0 },
   });
   const [availableReviews, setAvailableReviews] = useState({
-    isFetching: null,
+    showReviews: false,
     reviews: [],
   });
 
@@ -19,15 +20,15 @@ export default function Reviews() {
       ...prevReview,
       votes: { ...prevReview.votes, [category]: vote },
     }));
-    console.log(userReview);
   };
 
-  const getText = (e) => {
+  function getInputValues(e) {
+    const { name, value } = e.target;
     setUserReview((prevReview) => ({
       ...prevReview,
-      text: e.target.value,
+      [name]: value,
     }));
-  };
+  }
 
   async function handleReview(e) {
     e.preventDefault();
@@ -52,15 +53,17 @@ export default function Reviews() {
     }
 
     fetchAvailableReviews();
-  }, []);
+  }, [success]);
 
-  // function calculateVotesRadius(){
-  //   const totalVotes = userReview.votes.app + userReview.votes.food + userReview.votes.service;
-  //   const appVotes = userReview.votes.app;
-  //   const foodVotes = userReview.votes.food;
-  //   const serviceVotes = userReview.votes.service;
-  //   const appRadius = (appVotes / totalVotes) * 100;
-  // }
+  function calculateRadiusOfReviews(availableReviews) {
+    const reviewsScore = availableReviews.reviews?.reduce(
+      (acc, review) =>
+        acc + review.votes.app + review.votes.food + review.votes.service,
+      0
+    );
+    const finalRadius = reviewsScore / availableReviews.reviews?.length / 3;
+    return finalRadius;
+  }
 
   function calculateVotesRadius(review) {
     const totalVotes =
@@ -79,26 +82,38 @@ export default function Reviews() {
           <h1>REACTFOOD</h1>
         </div>
       </div>
-      <div className="reviews-cards">
-        {availableReviews.reviews?.map((review) => (
-          <div className="review" key={review.id}>
-            <h3>{review.text}</h3>
-            <div>{calculateVotesRadius(review).toFixed(1)}</div>
-            {[1, 2, 3, 4, 5].map((numeroStella) => (
-              <span key={numeroStella}>
-                {numeroStella <= calculateVotesRadius(review) ? "★" : "☆"}
-              </span>
-            ))}
-          </div>
-        ))}
+      <div id="app__valutation">
+        <h2>Valutazione del nostro Servizio!</h2>
+        <div className="app__valutation__stars">
+          {availableReviews.reviews?.length === 0 ? (
+            ""
+          ) : (
+            <div>{calculateRadiusOfReviews(availableReviews).toFixed(1)}</div>
+          )}
+          {[1, 2, 3, 4, 5].map((numeroStella) => (
+            <span key={numeroStella}>
+              {numeroStella <= calculateRadiusOfReviews(availableReviews)
+                ? "★"
+                : "☆"}
+            </span>
+          ))}
+          <div> - </div>
+          <a
+            onClick={() => {
+              setAvailableReviews((prev) => ({
+                ...prev,
+                showReviews: !prev.showReviews,
+              }));
+            }}
+          >
+            {availableReviews.reviews?.length} recensioni
+          </a>
+        </div>
       </div>
+
       {success ? (
-        <div id="reviews">
-          <h1>Grazie per il feedback!!</h1>
-          <img
-            src="/1426689-carino-bambini-con-panin.png"
-            alt="immagine-feedback"
-          />
+        <div>
+          <h2 className="review__send__success">Grazie per aver votato!</h2>
         </div>
       ) : (
         <form id="reviews">
@@ -113,7 +128,6 @@ export default function Reviews() {
                   {numeroStella <= userReview.votes.app ? "★" : "☆"}
                 </span>
               ))}
-              <p>Voto selezionato: {userReview.votes.app}</p>
             </div>
           </div>
 
@@ -128,7 +142,6 @@ export default function Reviews() {
                   {numeroStella <= userReview.votes.service ? "★" : "☆"}
                 </span>
               ))}
-              <p>Voto selezionato: {userReview.votes.service}</p>
             </div>
           </div>
           <div>
@@ -142,16 +155,16 @@ export default function Reviews() {
                   {numeroStella <= userReview.votes.food ? "★" : "☆"}
                 </span>
               ))}
-              <p>Voto selezionato: {userReview.votes.food}</p>
             </div>
           </div>
 
           <div>
             <h2>Dacci un tuo parere su come migliorare</h2>
+            <input type="text" name="name" onChange={getInputValues} />
             <textarea
               className="textarea"
               name="text"
-              onChange={getText}
+              onChange={getInputValues}
               value={userReview.text}
               placeholder="Scrivi qui..."
               cols="30"
@@ -163,6 +176,21 @@ export default function Reviews() {
             Invia Recensione
           </Button>
         </form>
+      )}
+      {availableReviews.showReviews && (
+        <div className="reviews-cards">
+          {availableReviews.reviews?.map((review) => (
+            <div className="review" key={review.id}>
+              <div>{review.name}</div>
+              {[1, 2, 3, 4, 5].map((numeroStella) => (
+                <span key={numeroStella}>
+                  {numeroStella <= calculateVotesRadius(review) ? "★" : "☆"}
+                </span>
+              ))}
+              <p>{review.text}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

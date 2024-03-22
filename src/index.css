@@ -480,6 +480,7 @@ h1 {
   padding: 1rem;
   border-radius: 4px;
   align-items: center;
+  font-size: 1.2rem;
 }
 
 #reviews span {
@@ -496,7 +497,7 @@ h1 {
 
 #reviews .textarea {
   width: 100%;
-  height: 100px;
+  height: 200px;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #000000;
@@ -504,6 +505,9 @@ h1 {
   background-color: #e3d9d9;
   font-size: 16px;
   resize: none;
+  &::placeholder {
+    color: black;
+  }
 }
 
 #reviews__header {
@@ -527,8 +531,56 @@ h1 {
 }
 
 .review {
-  width: 50rem;
+  width: 40rem;
   height: 20rem;
-  background-color: rgb(170, 148, 128);
+  background-color: rgb(170, 157, 128);
   color: white;
+  border-radius: 20px;
+  padding: 1rem;
+  word-wrap: break-word;
+  overflow-y: hidden;
+  animation: pulsing-card 1s;
+
+  & > span {
+    color: rgb(248, 232, 114);
+  }
+}
+
+#app__valutation {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.app__valutation__stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  gap: 1rem;
+
+  & > span {
+    color: rgb(248, 232, 114);
+  }
+  & > a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.review__send__success {
+  width: 30rem;
+  margin: auto;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 2rem;
+  animation: pulse 1s infinite;
+}
+
+.reviews-cards {
+  padding: 1rem;
+  font-size: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
 }

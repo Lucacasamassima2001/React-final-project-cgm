@@ -97,7 +97,8 @@ app.post("/reviews", async (req, res) => {
     userReview.votes.app < 1 ||
     userReview.votes.food < 1 ||
     userReview.votes.service < 1 ||
-    userReview.text.length === ""
+    userReview.text.length === "" ||
+    userReview.name.length === ""
   ) {
     return res.status(400).json({
       message: "Miss review: the vote or the text is missing.",
