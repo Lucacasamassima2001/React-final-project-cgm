@@ -33,6 +33,15 @@ app.get("/orders", async (req, res) => {
   }
 });
 
+app.get("/reviews", async (req, res) => {
+  try {
+    const reviews = await fs.readFile("./data/reviews.json", "utf8");
+    res.json(JSON.parse(reviews));
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.post("/orders", async (req, res) => {
   const orderData = req.body.order;
 

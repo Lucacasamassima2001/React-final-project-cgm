@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../Button/Button";
-import { inviaRecensione } from "../http";
+import { fetchReviews, inviaRecensione } from "../http";
+import { Link } from "react-router-dom";
 
 export default function Reviews() {
   const [success, setSuccess] = useState(false);
   const [userReview, setUserReview] = useState({
     text: "",
     votes: { app: 0, food: 0, service: 0 },
+  });
+  const [availableReviews, setAvailableReviews] = useState({
+    isFetching: null,
+    reviews: [],
   });
 
   const gestisciClickStella = (vote, category) => {
@@ -34,11 +39,59 @@ export default function Reviews() {
     } finally {
       setSuccess(true);
     }
-    console.log(userReview);
+  }
+
+  useEffect(() => {
+    async function fetchAvailableReviews() {
+      try {
+        const reviews = await fetchReviews();
+        setAvailableReviews((prev) => ({ ...prev, reviews: reviews }));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchAvailableReviews();
+  }, []);
+
+  // function calculateVotesRadius(){
+  //   const totalVotes = userReview.votes.app + userReview.votes.food + userReview.votes.service;
+  //   const appVotes = userReview.votes.app;
+  //   const foodVotes = userReview.votes.food;
+  //   const serviceVotes = userReview.votes.service;
+  //   const appRadius = (appVotes / totalVotes) * 100;
+  // }
+
+  function calculateVotesRadius(review) {
+    const totalVotes =
+      review.votes.app + review.votes.food + review.votes.service;
+    const finalRadius = totalVotes / 3;
+    return finalRadius;
   }
 
   return (
-    <div>
+    <div id="reviews-container">
+      <div id="reviews__header">
+        <div>
+          <Link to="/Home">
+            <img id="reviews__logo" src="/public/logo.jpg" alt="logo" />
+          </Link>
+          <h1>REACTFOOD</h1>
+        </div>
+      </div>
+      <div className="reviews-cards">
+        {availableReviews.reviews?.map((review) => (
+          <div className="review" key={review.id}>
+            <h3>{review.text}</h3>
+            <div>{calculateVotesRadius(review).toFixed(1)}</div>
+            {[1, 2, 3, 4, 5].map((numeroStella) => (
+              <span key={numeroStella}>
+                {numeroStella <= calculateVotesRadius(review) ? "★" : "☆"}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
       {success ? (
         <div id="reviews">
           <h1>Grazie per il feedback!!</h1>

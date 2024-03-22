@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
 export default function Header({ onOpen, data, onHistory }) {
@@ -14,7 +16,9 @@ export default function Header({ onOpen, data, onHistory }) {
         <i className="fa-solid fa-cart-shopping"></i>
         Cart ({data.length})
       </Button>
-      <p></p>
+      <Link to="/Reviews">
+        <Button>Reviews</Button>
+      </Link>
     </header>
   );
 }

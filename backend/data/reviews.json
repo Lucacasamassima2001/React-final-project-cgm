@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "text": "Locale accogliente",
+    "votes": { "app": 5, "food": 4, "service": 5 },
+    "id": "789.0688183060835"
+  },
+  {
+    "text": "Ciao a tutti",
+    "votes": { "app": 4, "food": 4, "service": 5 },
+    "id": "621.3111049709046"
+  }
+]

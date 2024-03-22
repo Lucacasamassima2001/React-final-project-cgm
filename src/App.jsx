@@ -6,7 +6,6 @@ import Modal from "./Modals/Modal";
 import Cart from "./Modals/Cart";
 import Checkout from "./Modals/Checkout";
 import HistoryModal from "./Modals/HistoryModal";
-import Reviews from "./Reviews/Reviews";
 function App() {
   const [meals, setMeals] = useState({
     isFetching: null,
@@ -175,7 +174,6 @@ function App() {
         meals={meals.meals}
         onAdd={getItem}
       />
-      <Reviews />
     </div>
   );
 }

@@ -9,6 +9,17 @@ export async function fetchAvailableMeals() {
   return resData;
 }
 
+export async function fetchReviews() {
+  const response = await fetch("http://localhost:3000/reviews");
+  const resData = await response.json();
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch reviews");
+  }
+
+  return resData;
+}
+
 export async function updateUserOrder(order) {
   const response = await fetch("http://localhost:3000/orders", {
     method: "POST",
