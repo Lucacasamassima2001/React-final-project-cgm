@@ -9,6 +9,7 @@ export default function Landing() {
           <img className="landing__img" src="/public/logo.jpg" alt="" />
           <h1>Welcome to REACTFOOD!</h1>
           <h2>Start your journey with us!</h2>
+
           <Link to="/Home">
             <Button>Let`s Order!</Button>
           </Link>
