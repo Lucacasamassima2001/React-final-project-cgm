@@ -1,0 +1,64 @@
+#mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 10%;
+}
+
+#title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+#mainHeader img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid #ffc404;
+}
+
+#mainHeader button {
+  font-size: 1.5rem;
+  font-family: "Lato", sans-serif;
+}
+
+#btnDetails {
+  max-width: 1120px;
+  margin: auto;
+}
+
+#btnDetails button {
+  margin: 0 0.7rem;
+}
+
+@media screen and (max-width: 1250px) {
+  #btnDetails {
+    max-width: calc(100% - 100px);
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  #mainHeader {
+    display: block;
+  }
+
+  #title {
+    padding-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #btnDetails button {
+    display: block;
+    margin: 1rem 0;
+  }
+}
+
+@media screen and (max-width: 645px) {
+  #title h1 {
+    font-size: 1.5rem;
+  }
+}

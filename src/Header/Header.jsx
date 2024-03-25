@@ -4,27 +4,25 @@ import Button from "../Button/Button";
 import Modal from "../Modals/Modal/Modal";
 import HistoryModal from "../Modals/History/HistoryModal";
 import { useState } from "react";
+import styles from "./Header.module.css";
 
 export default function Header({ onOpen, data }) {
   const [historyCheck, setHistoryCheck] = useState(false);
 
   return (
-    <header id="main-header">
+    <header id={styles.mainHeader}>
       <Modal open={historyCheck}>
         <HistoryModal onClose={() => setHistoryCheck(false)} />
       </Modal>
-      <div id="title">
+      <div id={styles.title}>
         <Link to="/Home">
           <img src="/public/logo.jpg" alt="" />
         </Link>
         <h1>REACTFOOD</h1>
       </div>
 
-      <div className="btn-details">
-        <Button
-          className="history-btn button"
-          onClick={() => setHistoryCheck(true)}
-        >
+      <div id={styles.btnDetails}>
+        <Button onClick={() => setHistoryCheck(true)}>
           <i className="fa-solid fa-rectangle-list"></i>History
         </Button>
         <Button cartStyle="cart-btn" onClick={onOpen}>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { fetchAvailableMeals } from "../http";
 import Meal from "./Meal";
+import styles from "./Meals.module.css";
 
 export default function Meals({ orderData, setOrderData }) {
   const [meals, setMeals] = useState({
@@ -80,7 +81,7 @@ export default function Meals({ orderData, setOrderData }) {
   }, []);
 
   return (
-    <div id="meals">
+    <div id={styles.meals}>
       {meals.isFetching && (
         <h1 className="fetching-text">Loading Available Meals...</h1>
       )}

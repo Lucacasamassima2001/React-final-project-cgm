@@ -7,6 +7,7 @@ import {
   calculateVotesRadius,
   handleClickOnStars,
 } from "./Reviews";
+import styles from "./Reviews.module.css";
 
 export default function Reviews() {
   const [success, setSuccess] = useState(false);
@@ -55,17 +56,17 @@ export default function Reviews() {
 
   return (
     <div id="reviews-container">
-      <div id="reviews__header">
+      <div id={styles.reviewsHeader}>
         <div>
           <Link to="/Home">
-            <img id="reviews__logo" src="/public/logo.jpg" alt="logo" />
+            <img id={styles.reviewsLogo} src="/public/logo.jpg" alt="logo" />
           </Link>
           <h1>REACTFOOD</h1>
         </div>
       </div>
-      <div id="app__valutation">
+      <div id={styles.appValutation}>
         <h2>Our service`s score!</h2>
-        <div className="app__valutation__stars">
+        <div className={styles.appValutationStars}>
           {availableReviews.reviews?.length === 0 ? (
             ""
           ) : (
@@ -94,10 +95,10 @@ export default function Reviews() {
 
       {success ? (
         <div>
-          <h2 className="review__send__success">Thanks for your review!</h2>
+          <h2 className={styles.reviewSendSuccess}>Thanks for your review!</h2>
         </div>
       ) : (
-        <form id="reviews">
+        <form id={styles.reviews}>
           <div>
             <h2>What do you think about our App?</h2>
             <div>
@@ -156,7 +157,7 @@ export default function Reviews() {
             />
             <label>Review</label>
             <textarea
-              className="textarea"
+              className={styles.textarea}
               name="text"
               onChange={getInputValues}
               value={userReview.text}
@@ -172,9 +173,9 @@ export default function Reviews() {
         </form>
       )}
       {availableReviews.showReviews && (
-        <div className="reviews-cards">
+        <div className={styles.reviewsCards}>
           {availableReviews.reviews?.map((review) => (
-            <div className="review" key={review.id}>
+            <div className={styles.review} key={review.id}>
               <div>{review.name}</div>
               {[1, 2, 3, 4, 5].map((numeroStella) => (
                 <span key={numeroStella}>

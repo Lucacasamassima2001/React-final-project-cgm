@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import styles from "./Input.module.css";
+
 export default function Input({
   labelText,
   onChange,
@@ -12,7 +14,9 @@ export default function Input({
       <label htmlFor={labelText}>{labelText}</label>
       <div className={"control-row"}>
         <input
-          className={error ? "control-row-error" : "control-row"}
+          className={
+            error ? `${styles.controlRowError}` : `${styles.controlRow}`
+          }
           onChange={onChange}
           name={inputName}
           type={inputType}
