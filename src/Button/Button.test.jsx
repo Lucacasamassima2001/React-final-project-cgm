@@ -28,6 +28,7 @@ describe("Button component tests", () => {
     expect(button).toHaveAttribute("id", "test");
   });
 
+
   test("Renders the button with onClick", () => {
     const onClickHandler = () => {
       onClickHandler.called = true;
@@ -38,4 +39,6 @@ describe("Button component tests", () => {
     button.click();
     expect(onClickHandler.called).toBe(true);
   });
+
 });
+
