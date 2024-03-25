@@ -4,21 +4,14 @@ import Button from "../Button/Button";
 
 export default function Header({ onOpen, data, onHistory }) {
   return (
-
     <header id="main-header">
       <div id="title">
         <Link to="/Home">
           <img src="/public/logo.jpg" alt="" />
         </Link>
         <h1>REACTFOOD</h1>
+      </div>
 
-  
-      <header id="main-header">
-        <div id="title">
-          <img src="/public/logo.jpg" alt="" />
-          <h1>REACTFOOD</h1>
-        </div>
-      </header>
       <div className="btn-details">
         <Button className="history-btn button" onClick={onHistory}>
           <i className="fa-solid fa-rectangle-list"></i>History
@@ -30,8 +23,7 @@ export default function Header({ onOpen, data, onHistory }) {
         <Link to="/Reviews">
           <Button>Reviews</Button>
         </Link>
-
       </div>
-    </>
+    </header>
   );
 }
