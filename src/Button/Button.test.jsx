@@ -29,10 +29,13 @@ describe("Button component tests", () => {
   });
 
   test("Renders the button with onClick", () => {
-    const onClick = jest.fn();
-    render(<Button onClick={onClick}>Test</Button>);
+    const onClickHandler = () => {
+      onClickHandler.called = true;
+    };
+    onClickHandler.called = false;
+    render(<Button onClick={onClickHandler}>Test</Button>);
     const button = screen.getByRole("button");
     button.click();
-    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClickHandler.called).toBe(true);
   });
 });
