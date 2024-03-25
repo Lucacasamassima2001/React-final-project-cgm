@@ -1,0 +1,60 @@
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.landingContent {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 999;
+  animation: slide-in-from-bottom 1s;
+
+  & > h1 {
+    font-size: 3rem;
+  }
+  & > h2 {
+    animation: infinite pulse 1s;
+    font-size: 2rem;
+  }
+  & > button {
+    animation: infinite pulse 1s;
+    font-size: 1.5rem;
+  }
+}
+
+.landingImg {
+  margin-top: 2rem;
+  width: 200px;
+  border-radius: 50%;
+  border: #ffab04 2px solid;
+}
+
+.landingText {
+  margin-top: 5rem;
+  text-align: center;
+  width: 60%;
+  font-size: 3rem;
+  font-style: italic;
+}
+
+.opacity {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-image: url("/public/food.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 40%;
+  opacity: 0.3;
+}
+
+@keyframes slide-in-from-bottom {
+  0% {
+    transform: translateY(50%);
+  }
+}

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { fetchOrders } from "../http";
 import Button from "../Button/Button";
 import HistoryItems from "../OrdersHistory/HistoryItems";
+import styles from "./HistoryModal.module.css";
+
 export default function HistoryModal({ onClose }) {
   const [customerOrders, setCustomerOrders] = useState({
     customerOrders: [],
@@ -49,11 +51,11 @@ export default function HistoryModal({ onClose }) {
   return (
     <div className="history-modal">
       <h2>History</h2>
-      <div className="history-container">
-        <div className="orders-list">
+      <div className={styles.historyContainer}>
+        <div className={styles.ordersList}>
           {customerOrders.customerOrders?.length === 0 && <p>No orders yet</p>}
 
-          <ul className="order-ul">
+          <ul className={styles.orderUl}>
             {customerOrders.customerOrders?.map((order) => (
               <li key={order.id}>
                 <Button
@@ -67,9 +69,9 @@ export default function HistoryModal({ onClose }) {
             ))}
           </ul>
         </div>
-        <div className="selected-order">
+        <div className={styles.selectedOrder}>
           <h3>Selected Order</h3>
-          <div className="order-info">
+          <div className={styles.orderInfo}>
             <h4>
               {customerOrders.orderSelected?.id
                 ? customerOrders.orderSelected.id
@@ -93,7 +95,7 @@ export default function HistoryModal({ onClose }) {
             : "No order selected..."}
         </div>
       </div>
-      <div className="history-modal-actions">
+      <div className={styles.historyModalActions}>
         <Button onClick={onClose}>Close</Button>
       </div>
     </div>

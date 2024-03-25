@@ -1,0 +1,10 @@
+.controlRow {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.controlRowError {
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgba(174, 30, 30, 0.56);
+}

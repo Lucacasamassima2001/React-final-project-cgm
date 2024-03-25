@@ -1,0 +1,34 @@
+.button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #ffc404;
+  border: 1px solid #ffc404;
+  color: #1f1a09;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+
+.button:hover,
+.button:active {
+  background-color: #ffab04;
+  border-color: #ffab04;
+  color: #1f1a09;
+}
+
+@media screen and (min-width: 946px) {
+  #cartBtn {
+    position: fixed;
+    top: 3.5rem;
+    right: 2rem;
+    z-index: 999;
+  }
+}
+
+@media screen and (max-width: 945px) {
+  #cartBtn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 2rem;
+    z-index: 999;
+  }
+}

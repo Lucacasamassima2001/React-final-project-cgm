@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import Button from "../Button/Button";
+import styles from "./Cart.module.css";
 
 export default function Cart({
   items,
@@ -21,17 +22,17 @@ export default function Cart({
   }
 
   return (
-    <div className="cart">
+    <div className={styles.cart}>
       <h2>Your Cart:</h2>
       {items.length === 0 ? <h4>No items in cart...</h4> : null}
       <ul>
         {items.map((item) =>
           item.quantity > 0 ? (
-            <li key={item.id} className="cart-item">
+            <li key={item.id} className={styles.cartItem}>
               <p>
                 {item.name} - {item.quantity} x ${item.price}
               </p>
-              <div className="cart-item-actions">
+              <div className={styles.cartItemActions}>
                 <Button onClick={() => onRemove(item)}>
                   <span>-</span>
                 </Button>
@@ -44,8 +45,8 @@ export default function Cart({
           ) : null
         )}
       </ul>
-      <div className="cart-total">Total: {formattedTotalPrice}</div>
-      <div className="modal-actions">
+      <div className={styles.cartTotal}>Total: {formattedTotalPrice}</div>
+      <div className={styles.modalActions}>
         {data.length > 0 ? <Button onClick={resetOrder}>Reset</Button> : null}
         <Button onClick={onClose}>Close</Button>
         {data.length > 0 ? (

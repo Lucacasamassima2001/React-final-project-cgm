@@ -3,6 +3,8 @@ import Button from "../Button/Button";
 import { useState } from "react";
 import { updateUserOrder } from "../http";
 import Input from "../Input/Input";
+import styles from "./Checkout.module.css";
+
 export default function Checkout({ orderData, data, onClose, onSave }) {
   const totalPrice = data.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -85,7 +87,7 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
           <h2>Checkout</h2>
           <p>Total Price: {formattedTotalPrice}</p>
           <form id="form" onSubmit={handleSave}>
-            <div className="control">
+            <div className={styles.control}>
               <Input
                 error={error && formData.name === ""}
                 onChange={getInputValues}
@@ -150,11 +152,11 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
                 }
               />
             </div>
-            <div className="modal-actions">
+            <div className={styles.modalActions}>
               <Button>Submit Order</Button>
             </div>
           </form>
-          <Button id="close-btn" onClick={onClose}>
+          <Button id={styles.closeBtn} onClick={onClose}>
             Close
           </Button>
           <Button onClick={resetForm}>Reset</Button>
