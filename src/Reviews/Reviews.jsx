@@ -159,8 +159,15 @@ export default function Reviews() {
           </div>
 
           <div>
-            <h2>Dacci un tuo parere su come migliorare</h2>
-            <input type="text" name="name" onChange={getInputValues} />
+            <h3>Dacci un tuo parere su come migliorare</h3>
+            <label>Nome</label>
+            <input
+              type="text"
+              name="name"
+              onChange={getInputValues}
+              placeholder="Scrivi qui..."
+            />
+            <label>Recensione</label>
             <textarea
               className="textarea"
               name="text"
