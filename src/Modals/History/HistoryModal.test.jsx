@@ -2,7 +2,7 @@
 import "@testing-library/jest-dom";
 import HistoryModal from "./HistoryModal";
 import { render, screen } from "@testing-library/react";
-import { fetchOrders } from "../http";
+import { fetchOrders } from "../../http";
 import { act } from "react-dom/test-utils";
 describe("HistoryModal component tests", () => {
   test("Renders the HistoryModal component", () => {

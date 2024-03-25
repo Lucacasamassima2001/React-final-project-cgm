@@ -1,24 +1,19 @@
 /* eslint-disable react/prop-types */
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
+import { decreaseItemQuantity, increaseItemQuantity } from "./Cart";
 
 export default function Cart({
   items,
-  onAdd,
-  onRemove,
   onClose,
-  data,
   onCheckout,
-  onReset,
+  orderData,
+  setOrderData,
 }) {
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
-
-  function resetOrder() {
-    onReset({ items: [], customer: {} });
-  }
 
   return (
     <div className="cart">
@@ -32,11 +27,19 @@ export default function Cart({
                 {item.name} - {item.quantity} x ${item.price}
               </p>
               <div className="cart-item-actions">
-                <Button onClick={() => onRemove(item)}>
+                <Button
+                  onClick={() =>
+                    decreaseItemQuantity(item, setOrderData, orderData)
+                  }
+                >
                   <span>-</span>
                 </Button>
                 {item.quantity}
-                <Button onClick={() => onAdd(item)}>
+                <Button
+                  onClick={() =>
+                    increaseItemQuantity(item, setOrderData, orderData)
+                  }
+                >
                   <span>+</span>
                 </Button>
               </div>
@@ -46,9 +49,13 @@ export default function Cart({
       </ul>
       <div className="cart-total">Total: {formattedTotalPrice}</div>
       <div className="modal-actions">
-        {data.length > 0 ? <Button onClick={resetOrder}>Reset</Button> : null}
+        {orderData.items?.length > 0 ? (
+          <Button onClick={() => setOrderData({ items: [], customer: {} })}>
+            Reset
+          </Button>
+        ) : null}
         <Button onClick={onClose}>Close</Button>
-        {data.length > 0 ? (
+        {orderData.items?.length > 0 ? (
           <Button onClick={onCheckout}>Go to Checkout</Button>
         ) : null}
       </div>

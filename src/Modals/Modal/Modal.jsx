@@ -1,6 +1,5 @@
 import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import Button from "../Button/Button";
 
 function Modal({ open, children }) {
   const dialog = useRef();
