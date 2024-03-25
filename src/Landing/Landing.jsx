@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import styles from "./Landing.module.css";
-
+import { useState } from "react";
+import Modal from "../Modals/Modal/Modal";
+import Login from "../Modals/Login/Login";
 export default function Landing() {
+  const [user, setUser] = useState({
+    name: "",
+    password: "",
+    admin: false,
+  });
+  const [login, setLogin] = useState(false);
   return (
     <>
       <div className={styles.landing}>
@@ -11,9 +18,10 @@ export default function Landing() {
           <h1>Welcome to REACTFOOD!</h1>
           <h2>Start your journey with us!</h2>
 
-          <Link to="/Home">
-            <Button>Let`s Order!</Button>
-          </Link>
+          <Button onClick={() => setLogin(true)}>Let`s Order!</Button>
+          <Modal open={login} onClose={() => setLogin(false)}>
+            <Login />
+          </Modal>
 
           <div className={styles.landingText}>
             `Stop by our convenient location and experience the mouthwatering
