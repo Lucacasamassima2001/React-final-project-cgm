@@ -27,6 +27,18 @@ describe("Button component tests", () => {
     const button = screen.getByRole("button");
     expect(button).toHaveAttribute("id", "test");
   });
+
+
+  test("Renders the button with onClick", () => {
+    const onClickHandler = () => {
+      onClickHandler.called = true;
+    };
+    onClickHandler.called = false;
+    render(<Button onClick={onClickHandler}>Test</Button>);
+    const button = screen.getByRole("button");
+    button.click();
+    expect(onClickHandler.called).toBe(true);
+  });
+
 });
 
-// to fix jest not defined error
