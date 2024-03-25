@@ -49,7 +49,7 @@ export async function fetchOrders() {
   return resData;
 }
 
-export async function inviaRecensione(review) {
+export async function sendReview(review) {
   const response = await fetch("http://localhost:3000/reviews", {
     method: "POST",
     body: JSON.stringify({ review }),

@@ -1,19 +1,28 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
+import Modal from "../Modals/Modal/Modal";
+import HistoryModal from "../Modals/History/HistoryModal";
+import { useState } from "react";
 import styles from "./Header.module.css";
 
-export default function Header({ onOpen, data, onHistory }) {
+export default function Header({ onOpen, data }) {
+  const [historyCheck, setHistoryCheck] = useState(false);
+
   return (
-    <>
-      <header id={styles.mainHeader}>
-        <div id={styles.title}>
+    <header id={styles.mainHeader}>
+      <Modal open={historyCheck}>
+        <HistoryModal onClose={() => setHistoryCheck(false)} />
+      </Modal>
+      <div id={styles.title}>
+        <Link to="/Home">
           <img src="/public/logo.jpg" alt="" />
-          <h1>REACTFOOD</h1>
-        </div>
-      </header>
+        </Link>
+        <h1>REACTFOOD</h1>
+      </div>
+
       <div id={styles.btnDetails}>
-        <Button onClick={onHistory}>
+        <Button onClick={() => setHistoryCheck(true)}>
           <i className="fa-solid fa-rectangle-list"></i>History
         </Button>
         <Button cartStyle="cart-btn" onClick={onOpen}>
@@ -24,6 +33,6 @@ export default function Header({ onOpen, data, onHistory }) {
           <Button>Reviews</Button>
         </Link>
       </div>
-    </>
+    </header>
   );
 }

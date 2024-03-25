@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
-import { fetchReviews, inviaRecensione } from "../http";
+import { fetchReviews, sendReview } from "../http";
 import { Link } from "react-router-dom";
+import {
+  calculateRadiusOfReviews,
+  calculateVotesRadius,
+  handleClickOnStars,
+} from "./Reviews";
 import styles from "./Reviews.module.css";
 
 export default function Reviews() {
@@ -16,13 +21,6 @@ export default function Reviews() {
     reviews: [],
   });
 
-  const gestisciClickStella = (vote, category) => {
-    setUserReview((prevReview) => ({
-      ...prevReview,
-      votes: { ...prevReview.votes, [category]: vote },
-    }));
-  };
-
   function getInputValues(e) {
     const { name, value } = e.target;
     setUserReview((prevReview) => ({
@@ -35,7 +33,7 @@ export default function Reviews() {
     e.preventDefault();
 
     try {
-      await inviaRecensione(userReview);
+      await sendReview(userReview);
     } catch (error) {
       console.log(error);
     } finally {
@@ -56,23 +54,6 @@ export default function Reviews() {
     fetchAvailableReviews();
   }, [success]);
 
-  function calculateRadiusOfReviews(availableReviews) {
-    const reviewsScore = availableReviews.reviews?.reduce(
-      (acc, review) =>
-        acc + review.votes.app + review.votes.food + review.votes.service,
-      0
-    );
-    const finalRadius = reviewsScore / availableReviews.reviews?.length / 3;
-    return finalRadius;
-  }
-
-  function calculateVotesRadius(review) {
-    const totalVotes =
-      review.votes.app + review.votes.food + review.votes.service;
-    const finalRadius = totalVotes / 3;
-    return finalRadius;
-  }
-
   return (
     <div id="reviews-container">
       <div id={styles.reviewsHeader}>
@@ -84,7 +65,7 @@ export default function Reviews() {
         </div>
       </div>
       <div id={styles.appValutation}>
-        <h2>Valutazione del nostro Servizio!</h2>
+        <h2>Our service`s score!</h2>
         <div className={styles.appValutationStars}>
           {availableReviews.reviews?.length === 0 ? (
             ""
@@ -107,81 +88,87 @@ export default function Reviews() {
               }));
             }}
           >
-            {availableReviews.reviews?.length} recensioni
+            {availableReviews.reviews?.length} reviews
           </a>
         </div>
       </div>
 
       {success ? (
         <div>
-          <h2 className={styles.reviewSendSuccess}>Grazie per aver votato!</h2>
+          <h2 className={styles.reviewSendSuccess}>Thanks for your review!</h2>
         </div>
       ) : (
         <form id={styles.reviews}>
           <div>
-            <h2>{`Come ti sei trovato con l'app?`}</h2>
+            <h2>What do you think about our App?</h2>
             <div>
-              {[1, 2, 3, 4, 5].map((numeroStella) => (
+              {[1, 2, 3, 4, 5].map((starNumber) => (
                 <span
-                  key={numeroStella}
-                  onClick={() => gestisciClickStella(numeroStella, "app")}
+                  key={starNumber}
+                  onClick={() =>
+                    handleClickOnStars(starNumber, "app", setUserReview)
+                  }
                 >
-                  {numeroStella <= userReview.votes.app ? "★" : "☆"}
+                  {starNumber <= userReview.votes.app ? "★" : "☆"}
                 </span>
               ))}
             </div>
           </div>
 
           <div>
-            <h2>Come valuti il nostro servizio?</h2>
+            <h2>How about our service?</h2>
             <div>
-              {[1, 2, 3, 4, 5].map((numeroStella) => (
+              {[1, 2, 3, 4, 5].map((starNumber) => (
                 <span
-                  key={numeroStella}
-                  onClick={() => gestisciClickStella(numeroStella, "service")}
+                  key={starNumber}
+                  onClick={() =>
+                    handleClickOnStars(starNumber, "service", setUserReview)
+                  }
                 >
-                  {numeroStella <= userReview.votes.service ? "★" : "☆"}
+                  {starNumber <= userReview.votes.service ? "★" : "☆"}
                 </span>
               ))}
             </div>
           </div>
           <div>
-            <h2>La del nostro cibo ti soddisfa?</h2>
+            <h2>Did you like our food?</h2>
             <div>
-              {[1, 2, 3, 4, 5].map((numeroStella) => (
+              {[1, 2, 3, 4, 5].map((starNumber) => (
                 <span
-                  key={numeroStella}
-                  onClick={() => gestisciClickStella(numeroStella, "food")}
+                  key={starNumber}
+                  onClick={() =>
+                    handleClickOnStars(starNumber, "food", setUserReview)
+                  }
                 >
-                  {numeroStella <= userReview.votes.food ? "★" : "☆"}
+                  {starNumber <= userReview.votes.food ? "★" : "☆"}
                 </span>
               ))}
             </div>
           </div>
 
           <div>
-            <h3>Dacci un tuo parere su come migliorare</h3>
-            <label>Nome</label>
+            <h3>Let us know how to improve ourselves</h3>
+            <label>Name</label>
             <input
               type="text"
               name="name"
               onChange={getInputValues}
-              placeholder="Scrivi qui..."
+              placeholder="Your name..."
             />
-            <label>Recensione</label>
+            <label>Review</label>
             <textarea
               className={styles.textarea}
               name="text"
               onChange={getInputValues}
               value={userReview.text}
-              placeholder="Scrivi qui..."
+              placeholder="Write here..."
               cols="30"
               rows="10"
             ></textarea>
           </div>
 
           <Button type="submit" onClick={handleReview}>
-            Invia Recensione
+            Send Review
           </Button>
         </form>
       )}

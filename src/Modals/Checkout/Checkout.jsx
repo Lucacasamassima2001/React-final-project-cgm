@@ -1,18 +1,19 @@
 /* eslint-disable react/prop-types */
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 import { useState } from "react";
-import { updateUserOrder } from "../http";
-import Input from "../Input/Input";
-import styles from "./Checkout.module.css";
-
-export default function Checkout({ orderData, data, onClose, onSave }) {
-  const totalPrice = data.reduce(
+import { updateUserOrder } from "../../http";
+import Input from "../../Input/Input";
+import SuccessModal from "../Success/SuccessModal";
+export default function Checkout({ orderData, onClose, onSave }) {
+  const totalPrice = orderData.items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
+  const [outCome, setOutCome] = useState({
+    success: false,
+    error: false,
+  });
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -55,108 +56,98 @@ export default function Checkout({ orderData, data, onClose, onSave }) {
         console.log(error);
       } finally {
         onSave({ items: [], customer: {} });
-        setSuccess(true);
+        setOutCome((prev) => ({ ...prev, success: true }));
       }
     } else {
       console.log("not valid");
-      setError(true);
+      setOutCome({ success: false, error: true });
     }
   }
 
   function resetForm() {
     document.getElementById("form").reset();
-    setError(false);
+    setOutCome({ success: false, error: false });
   }
 
   return (
     <div id="checkout">
-      {success ? (
-        <div>
-          <h2>Success!</h2>
-          <p>Your order was submitted succesfully.</p>
-          <p>
-            We will be back to you with more details via email within the next
-            few minutes.
-          </p>
-          <div className="modal-actions">
-            <Button onClick={onClose}>Close</Button>
-          </div>
-        </div>
+      {outCome.success ? (
+        <SuccessModal onClose={onClose} />
       ) : (
         <div>
           <h2>Checkout</h2>
           <p>Total Price: {formattedTotalPrice}</p>
           <form id="form" onSubmit={handleSave}>
-            <div className={styles.control}>
+            <div className="control">
               <Input
-                error={error && formData.name === ""}
+                error={outCome.error && formData.name === ""}
                 onChange={getInputValues}
                 labelText={"Full-name"}
                 inputName={"name"}
                 inputType={"text"}
                 placeholderText={
-                  error && formData.name === ""
+                  outCome.error && formData.name === ""
                     ? "Please enter your name..."
                     : ""
                 }
               />
 
               <Input
-                error={error && formData.email === ""}
+                error={outCome.error && formData.email === ""}
                 onChange={getInputValues}
                 labelText={"E-Mail address"}
                 inputName={"email"}
                 inputType={"email"}
                 placeholderText={
-                  error && formData.email === ""
+                  outCome.error && formData.email === ""
                     ? "Please enter your email..."
                     : ""
                 }
               />
               <Input
-                error={error && formData.street === ""}
+                error={outCome.error && formData.street === ""}
                 onChange={getInputValues}
                 labelText={"Street address"}
                 inputName={"street"}
                 inputType={"text"}
                 placeholderText={
-                  error && formData.street === ""
+                  outCome.error && formData.street === ""
                     ? "Please insert your street..."
                     : ""
                 }
               />
 
               <Input
-                error={error && formData["postal-code"] === ""}
+                error={outCome.error && formData["postal-code"] === ""}
                 onChange={getInputValues}
                 labelText={"Postal code"}
                 inputName={"postal-code"}
                 inputType={"number"}
                 placeholderText={
-                  error && formData["postal-code"] === ""
+                  outCome.error && formData["postal-code"] === ""
                     ? "Please enter your postal code..."
                     : ""
                 }
               />
 
               <Input
-                error={error && formData.city === ""}
+                error={outCome.error && formData.city === ""}
                 onChange={getInputValues}
                 labelText={"City"}
                 inputName={"city"}
                 inputType={"text"}
                 placeholderText={
-                  error && formData.city === ""
+                  outCome.error && formData.city === ""
                     ? "Please enter your city..."
                     : ""
                 }
               />
             </div>
-            <div className={styles.modalActions}>
+            <div className="modal-actions">
               <Button>Submit Order</Button>
             </div>
           </form>
-          <Button id={styles.closeBtn} onClick={onClose}>
+          <Button id="close-btn" onClick={onClose}>
             Close
           </Button>
           <Button onClick={resetForm}>Reset</Button>
