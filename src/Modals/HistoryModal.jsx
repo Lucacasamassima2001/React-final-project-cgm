@@ -47,7 +47,7 @@ export default function HistoryModal({ onClose }) {
   }, []);
 
   return (
-    <div className="history-modal">
+    <div data-testid="history-modal" className="history-modal">
       <h2>History</h2>
       <div className="history-container">
         <div className="orders-list">

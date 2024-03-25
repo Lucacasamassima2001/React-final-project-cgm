@@ -6,7 +6,9 @@ export default function Header({ onOpen, data, onHistory }) {
   return (
     <header id="main-header">
       <div id="title">
-        <img src="/public/logo.jpg" alt="" />
+        <Link to="/Home">
+          <img src="/public/logo.jpg" alt="" />
+        </Link>
         <h1>REACTFOOD</h1>
       </div>
       <Button className="history-btn button" onClick={onHistory}>
