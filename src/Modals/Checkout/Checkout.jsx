@@ -4,6 +4,7 @@ import { useState } from "react";
 import { updateUserOrder } from "../../http";
 import Input from "../../Input/Input";
 import SuccessModal from "../Success/SuccessModal";
+import styles from "./Checkout.module.css";
 export default function Checkout({ orderData, onClose, onSave }) {
   const totalPrice = orderData.items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -70,7 +71,7 @@ export default function Checkout({ orderData, onClose, onSave }) {
   }
 
   return (
-    <div id="checkout">
+    <div>
       {outCome.success ? (
         <SuccessModal onClose={onClose} />
       ) : (
@@ -78,7 +79,7 @@ export default function Checkout({ orderData, onClose, onSave }) {
           <h2>Checkout</h2>
           <p>Total Price: {formattedTotalPrice}</p>
           <form id="form" onSubmit={handleSave}>
-            <div className="control">
+            <div className={styles.control}>
               <Input
                 error={outCome.error && formData.name === ""}
                 onChange={getInputValues}
@@ -143,14 +144,16 @@ export default function Checkout({ orderData, onClose, onSave }) {
                 }
               />
             </div>
-            <div className="modal-actions">
+            <div className={styles.modalActions}>
               <Button>Submit Order</Button>
             </div>
           </form>
-          <Button id="close-btn" onClick={onClose}>
-            Close
-          </Button>
-          <Button onClick={resetForm}>Reset</Button>
+          <div className={styles.modalBackActions}>
+            <Button id="close-btn" onClick={onClose}>
+              Close
+            </Button>
+            <Button onClick={resetForm}>Reset</Button>
+          </div>
         </div>
       )}
     </div>

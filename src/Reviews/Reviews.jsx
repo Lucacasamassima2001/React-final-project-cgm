@@ -99,50 +99,52 @@ export default function Reviews() {
         </div>
       ) : (
         <form id={styles.reviews}>
-          <div>
-            <h2>What do you think about our App?</h2>
+          <div id={styles.reviewsQuestions}>
             <div>
-              {[1, 2, 3, 4, 5].map((starNumber) => (
-                <span
-                  key={starNumber}
-                  onClick={() =>
-                    handleClickOnStars(starNumber, "app", setUserReview)
-                  }
-                >
-                  {starNumber <= userReview.votes.app ? "★" : "☆"}
-                </span>
-              ))}
+              <h2>What do you think about our App?</h2>
+              <div>
+                {[1, 2, 3, 4, 5].map((starNumber) => (
+                  <span
+                    key={starNumber}
+                    onClick={() =>
+                      handleClickOnStars(starNumber, "app", setUserReview)
+                    }
+                  >
+                    {starNumber <= userReview.votes.app ? "★" : "☆"}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div>
-            <h2>How about our service?</h2>
             <div>
-              {[1, 2, 3, 4, 5].map((starNumber) => (
-                <span
-                  key={starNumber}
-                  onClick={() =>
-                    handleClickOnStars(starNumber, "service", setUserReview)
-                  }
-                >
-                  {starNumber <= userReview.votes.service ? "★" : "☆"}
-                </span>
-              ))}
+              <h2>How about our service?</h2>
+              <div>
+                {[1, 2, 3, 4, 5].map((starNumber) => (
+                  <span
+                    key={starNumber}
+                    onClick={() =>
+                      handleClickOnStars(starNumber, "service", setUserReview)
+                    }
+                  >
+                    {starNumber <= userReview.votes.service ? "★" : "☆"}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h2>Did you like our food?</h2>
             <div>
-              {[1, 2, 3, 4, 5].map((starNumber) => (
-                <span
-                  key={starNumber}
-                  onClick={() =>
-                    handleClickOnStars(starNumber, "food", setUserReview)
-                  }
-                >
-                  {starNumber <= userReview.votes.food ? "★" : "☆"}
-                </span>
-              ))}
+              <h2>Did you like our food?</h2>
+              <div>
+                {[1, 2, 3, 4, 5].map((starNumber) => (
+                  <span
+                    key={starNumber}
+                    onClick={() =>
+                      handleClickOnStars(starNumber, "food", setUserReview)
+                    }
+                  >
+                    {starNumber <= userReview.votes.food ? "★" : "☆"}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 

@@ -32,3 +32,7 @@
 .modalActions {
   text-align: right;
 }
+.modalBackActions {
+  display: flex;
+  gap: 1rem;
+}
