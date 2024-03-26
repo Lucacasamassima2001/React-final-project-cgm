@@ -109,6 +109,9 @@ export default function Reviews() {
       {outCome.success ? (
         <div>
           <h2 className={styles.reviewSendSuccess}>Thanks for your review!</h2>
+          <div className={styles.animation}>
+            <img src="/WinnethePooh.gif" alt="" />
+          </div>
         </div>
       ) : (
         <form id={styles.reviews}>

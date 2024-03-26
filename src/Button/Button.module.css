@@ -6,13 +6,15 @@
   color: #1f1a09;
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
+  font-weight: bold;
+  border: 3px solid #e9a40f;
 }
 
 .button:hover,
 .button:active {
   background-color: #ffab04;
   border-color: #ffab04;
-  color: #1f1a09;
+  color: #000000;
 }
 
 @media screen and (min-width: 946px) {

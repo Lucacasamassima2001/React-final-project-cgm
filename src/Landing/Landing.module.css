@@ -20,6 +20,8 @@
   & > h2 {
     animation: infinite pulse 1s;
     font-size: 2rem;
+
+    font-weight: bold;
   }
   & > button {
     animation: infinite pulse 1s;
@@ -50,7 +52,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 40%;
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 @keyframes slide-in-from-bottom {

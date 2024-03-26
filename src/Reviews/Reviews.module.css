@@ -59,13 +59,14 @@
 .review {
   width: 40rem;
   height: 20rem;
-  background-color: rgb(170, 157, 128);
+  background-color: rgb(207, 154, 39);
   color: white;
   border-radius: 20px;
   padding: 1rem;
   word-wrap: break-word;
   overflow-y: hidden;
   animation: pulsing-card 1s;
+  border: 1px white solid;
 
   & > span {
     color: rgb(248, 232, 114);
@@ -91,6 +92,11 @@
     cursor: pointer;
     text-decoration: underline;
   }
+}
+.animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .reviewSendSuccess {
@@ -122,7 +128,7 @@
   font-size: 16px;
   resize: none;
   margin-bottom: 1rem;
-  font-family: monospace;
+  font-family: "Raleway", sans-serif;
 }
 
 #reviews input::placeholder {
@@ -131,6 +137,7 @@
 
 #reviews textarea {
   outline: none;
+  font-family: "Raleway", sans-serif;
 }
 
 .reviewsQuestion {
@@ -159,6 +166,9 @@
   #appValutation * {
     font-size: 1.5rem;
   }
+  .reviewSendSuccess {
+    animation: pulse 1s infinite;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -168,6 +178,9 @@
 
   #reviews span {
     font-size: 1.7rem;
+  }
+  .reviewSendSuccess {
+    animation: pulse 1s infinite;
   }
 }
 

@@ -12,7 +12,7 @@ export default function Login({ setLogin }) {
   const [userData, setUserData] = useState({
     name: "",
     password: "",
-    admin: false,
+
     isLogged: false,
   });
 
@@ -58,13 +58,6 @@ export default function Login({ setLogin }) {
               placeholderText={"Enter password"}
               labelText="Password"
               inputName="password"
-            />
-            <Input
-              id={styles.adminCheck}
-              onChange={getUserDatas}
-              inputType="checkbox"
-              labelText="Are you a Admin?"
-              inputName="admin"
             />
           </form>
           <div className={styles.loginModalActions}>

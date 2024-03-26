@@ -22,7 +22,7 @@ export default function Header({ onOpen, data, user, setLogout }) {
       </div>
 
       <div id={styles.btnDetails}>
-        {user.admin === "on" ? (
+        {user.name === "Bruno Laria" ? (
           <Button onClick={() => setHistoryCheck(true)}>
             <i className="fa-solid fa-rectangle-list"></i>History
           </Button>

@@ -51,6 +51,9 @@ function App() {
         data={orderData.items}
         onOpen={() => setModalIsOpen((prev) => ({ ...prev, open: true }))}
       />
+      <div className="homeGif">
+        <img src="/FoodVlogger.gif" alt="" />
+      </div>
       <Meals orderData={orderData} setOrderData={setOrderData} />
     </div>
   );

@@ -1,0 +1,15 @@
+#success {
+  background-image: url("/DeliveryBoy.gif");
+  background-repeat: no-repeat;
+  background-size: 90% 90%;
+  background-position: 20% 200%;
+  position: relative;
+  height: 400px;
+  font-size: 1.3rem;
+}
+
+.successAction {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

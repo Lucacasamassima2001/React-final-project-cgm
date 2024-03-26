@@ -19,6 +19,7 @@ export default function Cart({
     <div className={styles.cart}>
       <h2>Your Cart:</h2>
       {items.length === 0 ? <h4>No items in cart...</h4> : null}
+
       <ul>
         {items.map((item) =>
           item.quantity > 0 ? (
