@@ -4,6 +4,8 @@ import { useState } from "react";
 import Modal from "./Modals/Modal/Modal";
 import Cart from "./Modals/Cart/Cart.jsx";
 import Checkout from "./Modals/Checkout/Checkout";
+import OrderContextProvider from "./store/food-order-context";
+
 function App() {
   const [orderData, setOrderData] = useState({ items: [], customer: {} });
   const [modalIsOpen, setModalIsOpen] = useState({
@@ -12,7 +14,7 @@ function App() {
   });
 
   return (
-    <div>
+    <OrderContextProvider>
       <Modal
         open={modalIsOpen.checkout}
         data={orderData.items}
@@ -44,7 +46,7 @@ function App() {
         onOpen={() => setModalIsOpen((prev) => ({ ...prev, open: true }))}
       />
       <Meals orderData={orderData} setOrderData={setOrderData} />
-    </div>
+    </OrderContextProvider>
   );
 }
 

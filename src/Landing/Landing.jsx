@@ -3,15 +3,13 @@ import styles from "./Landing.module.css";
 import { useState } from "react";
 import Modal from "../Modals/Modal/Modal";
 import Login from "../Modals/Login/Login";
+import OrderContextProvider from "../store/food-order-context";
+
 export default function Landing() {
-  const [user, setUser] = useState({
-    name: "",
-    password: "",
-    admin: false,
-  });
   const [login, setLogin] = useState(false);
+
   return (
-    <>
+    <OrderContextProvider>
       <div className={styles.landing}>
         <div className={styles.landingContent}>
           <img className={styles.landingImg} src="/public/logo.jpg" alt="" />
@@ -32,6 +30,6 @@ export default function Landing() {
         </div>
         <div className={styles.opacity}></div>
       </div>
-    </>
+    </OrderContextProvider>
   );
 }
