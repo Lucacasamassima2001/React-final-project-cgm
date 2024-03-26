@@ -33,7 +33,7 @@ export default function Login({ setLogin }) {
   }
 
   return (
-    <div>
+    <div id={styles.login}>
       {userCtx.isLogged ? (
         <div>
           <h2>Welcome back {userCtx.name}</h2>
@@ -60,9 +60,10 @@ export default function Login({ setLogin }) {
               inputName="password"
             />
             <Input
+              id={styles.adminCheck}
               onChange={getUserDatas}
               inputType="checkbox"
-              labelText="Admin"
+              labelText="Are you a Admin?"
               inputName="admin"
             />
           </form>
