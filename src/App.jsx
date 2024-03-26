@@ -1,20 +1,24 @@
 import Header from "./Header/Header";
 import Meals from "./Meals/Meals";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "./Modals/Modal/Modal";
 import Cart from "./Modals/Cart/Cart.jsx";
 import Checkout from "./Modals/Checkout/Checkout";
-import OrderContextProvider from "./store/food-order-context";
-
+import { OrderContext } from "./store/food-order-context.jsx";
 function App() {
+  const { userCtx, setUserCtx } = useContext(OrderContext);
   const [orderData, setOrderData] = useState({ items: [], customer: {} });
   const [modalIsOpen, setModalIsOpen] = useState({
     open: false,
     checkout: false,
   });
 
+  function logout() {
+    setUserCtx({ name: "", password: "", admin: false, isLogged: false });
+  }
+  console.log(userCtx);
   return (
-    <OrderContextProvider>
+    <div>
       <Modal
         open={modalIsOpen.checkout}
         data={orderData.items}
@@ -42,11 +46,13 @@ function App() {
         />
       </Modal>
       <Header
+        setLogout={logout}
+        user={userCtx}
         data={orderData.items}
         onOpen={() => setModalIsOpen((prev) => ({ ...prev, open: true }))}
       />
       <Meals orderData={orderData} setOrderData={setOrderData} />
-    </OrderContextProvider>
+    </div>
   );
 }
 

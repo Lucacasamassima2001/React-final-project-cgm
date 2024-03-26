@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import "./index.css";
 import Landing from "./Landing/Landing.jsx";
 import Reviews from "./Reviews/Reviews.jsx";
+import OrderContextProvider from "./store/food-order-context.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <OrderContextProvider>
+      <RouterProvider router={router} />
+    </OrderContextProvider>
   </React.StrictMode>
 );

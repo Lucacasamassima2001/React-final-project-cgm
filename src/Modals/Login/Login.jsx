@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
@@ -6,7 +6,7 @@ import styles from "./Login.module.css";
 import { useContext, useState } from "react";
 import { OrderContext } from "../../store/food-order-context";
 
-export default function Login() {
+export default function Login({ setLogin }) {
   const { userCtx, setUserCtx } = useContext(OrderContext);
 
   const [userData, setUserData] = useState({
@@ -67,6 +67,7 @@ export default function Login() {
             />
           </form>
           <div className={styles.loginModalActions}>
+            <Button onClick={() => setLogin(false)}>Cancel</Button>
             <Button onClick={handleLogin}>Log in</Button>
           </div>
         </div>

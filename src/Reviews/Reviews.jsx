@@ -8,9 +8,13 @@ import {
   handleClickOnStars,
 } from "./Reviews";
 import styles from "./Reviews.module.css";
-
+import ErrorModal from "../Modals/Error/ErrorModal";
+import Modal from "../Modals/Modal/Modal";
 export default function Reviews() {
-  const [success, setSuccess] = useState(false);
+  const [outCome, setOutcome] = useState({
+    success: false,
+    error: false,
+  });
   const [userReview, setUserReview] = useState({
     text: "",
     name: "",
@@ -31,13 +35,22 @@ export default function Reviews() {
 
   async function handleReview(e) {
     e.preventDefault();
-
-    try {
-      await sendReview(userReview);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setSuccess(true);
+    if (
+      userReview.text === "" ||
+      userReview.name === "" ||
+      userReview.votes.app === 0 ||
+      userReview.votes.food === 0 ||
+      userReview.votes.service === 0
+    ) {
+      setOutcome({ success: false, error: true });
+    } else {
+      try {
+        await sendReview(userReview);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setOutcome({ success: true, error: false });
+      }
     }
   }
 
@@ -52,7 +65,7 @@ export default function Reviews() {
     }
 
     fetchAvailableReviews();
-  }, [success]);
+  }, [outCome.success]);
 
   return (
     <div id="reviews-container">
@@ -93,7 +106,7 @@ export default function Reviews() {
         </div>
       </div>
 
-      {success ? (
+      {outCome.success ? (
         <div>
           <h2 className={styles.reviewSendSuccess}>Thanks for your review!</h2>
         </div>
@@ -162,7 +175,6 @@ export default function Reviews() {
               className={styles.textarea}
               name="text"
               onChange={getInputValues}
-              value={userReview.text}
               placeholder="Write here..."
               cols="30"
               rows="10"
@@ -172,6 +184,11 @@ export default function Reviews() {
           <Button type="submit" onClick={handleReview}>
             Send Review
           </Button>
+          <Modal open={outCome.error}>
+            <ErrorModal
+              onClose={() => setOutcome({ ...outCome, error: false })}
+            />
+          </Modal>
         </form>
       )}
       {availableReviews.showReviews && (

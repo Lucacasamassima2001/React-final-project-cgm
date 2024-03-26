@@ -6,7 +6,7 @@ import HistoryModal from "../Modals/History/HistoryModal";
 import { useState } from "react";
 import styles from "./Header.module.css";
 
-export default function Header({ onOpen, data }) {
+export default function Header({ onOpen, data, user, setLogout }) {
   const [historyCheck, setHistoryCheck] = useState(false);
 
   return (
@@ -22,13 +22,18 @@ export default function Header({ onOpen, data }) {
       </div>
 
       <div id={styles.btnDetails}>
-        <Button onClick={() => setHistoryCheck(true)}>
-          <i className="fa-solid fa-rectangle-list"></i>History
-        </Button>
+        {user.admin === "on" ? (
+          <Button onClick={() => setHistoryCheck(true)}>
+            <i className="fa-solid fa-rectangle-list"></i>History
+          </Button>
+        ) : null}
         <Button cartStyle="cart-btn" onClick={onOpen}>
           <i className="fa-solid fa-cart-shopping"></i>
           Cart ({data.length})
         </Button>
+        <Link to="/">
+          <Button onClick={setLogout}>Logout</Button>
+        </Link>
         <Link to="/Reviews">
           <Button>Reviews</Button>
         </Link>
