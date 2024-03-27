@@ -26,7 +26,6 @@ export default function Landing() {
           nothing short of exceptional.`
         </div>
       </div>
-      <div className={styles.opacity}></div>
     </div>
   );
 }
