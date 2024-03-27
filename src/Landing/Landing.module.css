@@ -52,6 +52,9 @@
 }
 
 @media screen and (max-width: 555px) {
+  .landing {
+    height: auto;
+  }
   .landingContent {
     gap: 1rem;
     & > h1 {
@@ -64,7 +67,7 @@
   }
 
   .landingText {
-    margin-top: 1rem;
+    margin-top: 2rem;
     width: 100%;
     font-size: 1.5rem;
     padding: 1rem;

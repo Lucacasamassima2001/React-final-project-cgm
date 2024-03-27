@@ -176,6 +176,9 @@
     font-size: 1.2rem;
   }
 
+  #reviewsHeader > div > h1 {
+    font-size: 1.5rem;
+  }
   #reviews span {
     font-size: 1.7rem;
   }
