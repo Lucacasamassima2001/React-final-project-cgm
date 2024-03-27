@@ -27,6 +27,8 @@
 #btnDetails {
   max-width: 1120px;
   margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 #btnDetails button {

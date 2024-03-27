@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  background-color: rgb(71, 69, 69);
 }
 
 .landingContent {
@@ -13,6 +14,7 @@
   gap: 2rem;
   z-index: 999;
   animation: slide-in-from-bottom 1s;
+  font-weight: bold;
 
   & > h1 {
     font-size: 3rem;
